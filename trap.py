@@ -15,7 +15,7 @@ parser.add_argument('--monitor-name', help='Enter name of monitor. ie: Name of e
 
 monitor_name = vars(parser.parse_args())
 
-def jsonHopDocument(hop_number, hop_ip, hop_asn, hop_pct_loss, hop_ping_count, hop_ping_last_ms, hop_ping_avg_ms, hop_ping_best_ms, hop_ping_worst_ms, hop_ping_std_dev, hop_prev_hop):
+def jsonHopDocument(hop_number, hop_ip, hop_pct_loss, hop_ping_count, hop_ping_last_ms, hop_ping_avg_ms, hop_ping_best_ms, hop_ping_worst_ms, hop_ping_std_dev, hop_prev_hop):
 	data = {}
 	
 	data['souce_host'] = json_input['report']['mtr']['src']
@@ -29,7 +29,6 @@ def jsonHopDocument(hop_number, hop_ip, hop_asn, hop_pct_loss, hop_ping_count, h
 
 	data['hop_number'] = hop_number
 	data['hop_ip'] = hop_ip
-	data['hop_asn'] = hop_asn
 	data['hop_pct_loss'] = hop_pct_loss
 	data['hop_ping_count'] = hop_ping_count
 	data['hop_ping_last_ms'] = hop_ping_last_ms
@@ -47,7 +46,7 @@ def jsonHopDocument(hop_number, hop_ip, hop_asn, hop_pct_loss, hop_ping_count, h
 	print (json_data)
 
 
-def jsonFullpathDocument(traceroute_full_path, endpoint_hop_number, endpoint_ip, endpoint_asn, endpoint_pct_loss, endpoint_ping_count, endpoint_ping_last_ms, endpoint_ping_avg_ms, endpoint_ping_best_ms, endpoint_ping_worst_ms, endpoint_ping_std_dev):
+def jsonFullpathDocument(traceroute_full_path, endpoint_hop_number, endpoint_ip, endpoint_pct_loss, endpoint_ping_count, endpoint_ping_last_ms, endpoint_ping_avg_ms, endpoint_ping_best_ms, endpoint_ping_worst_ms, endpoint_ping_std_dev):
 	data = {}
 	data['souce_host'] = json_input['report']['mtr']['src']
 	data['destination_host'] = json_input['report']['mtr']['dst']
@@ -64,7 +63,6 @@ def jsonFullpathDocument(traceroute_full_path, endpoint_hop_number, endpoint_ip,
 
 	data['endpoint_hop_number'] = endpoint_hop_number
 	data['endpoint_ip'] = endpoint_ip
-	data['endpoint_asn'] = endpoint_asn
 	data['endpoint_pct_loss'] = endpoint_pct_loss
 	data['endpoint_ping_count'] = endpoint_ping_count
 	data['endpoint_ping_last_ms'] = endpoint_ping_last_ms
@@ -84,7 +82,6 @@ for hop in json_input['report']['hubs']:
 
 	hop_number = hop['count']
 	hop_ip = hop['host']
-	hop_asn = hop['ASN']
 	hop_pct_loss = hop['Loss%']
 	hop_ping_count = hop['Snt']
 	hop_ping_last_ms = hop['Last']
@@ -97,10 +94,10 @@ for hop in json_input['report']['hubs']:
 	if not 'hop_prev_hop' in locals():
 		hop_prev_hop = json_input['report']['mtr']['src']
 
-	jsonHopDocument(hop_number, hop_ip, hop_asn, hop_pct_loss, hop_ping_count, hop_ping_last_ms, hop_ping_avg_ms, hop_ping_best_ms, hop_ping_worst_ms, hop_ping_std_dev, hop_prev_hop)
+	jsonHopDocument(hop_number, hop_ip, hop_pct_loss, hop_ping_count, hop_ping_last_ms, hop_ping_avg_ms, hop_ping_best_ms, hop_ping_worst_ms, hop_ping_std_dev, hop_prev_hop)
 	traceroute_full_path.append(hop_ip)
 	hop_prev_hop = hop['host']
 
 	if int(hop_number) == int(len(json_input['report']['hubs'])):	
-		jsonFullpathDocument(traceroute_full_path, hop_number, hop_ip, hop_asn, hop_pct_loss, hop_ping_count, hop_ping_last_ms, hop_ping_avg_ms, hop_ping_best_ms, hop_ping_worst_ms, hop_ping_std_dev)
+		jsonFullpathDocument(traceroute_full_path, hop_number, hop_ip, hop_pct_loss, hop_ping_count, hop_ping_last_ms, hop_ping_avg_ms, hop_ping_best_ms, hop_ping_worst_ms, hop_ping_std_dev)
 		traceroute_path_identifier = str(uuid.uuid4())
