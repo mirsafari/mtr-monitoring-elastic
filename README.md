@@ -3,11 +3,23 @@ Python script that takes input from MTR in json format, adds additional fields a
 
 MTR accepted output:
 
-mtr -r -w -c 1 -j -n -z IP.ADD.RE.SS | ./mtr_parser.py --monitor-name Endpoint-Name
+mtr -r -w -j -n -c 1 IP.ADD.RE.SS | ./mtr_parser.py --monitor-name Endpoint-Name
 
 -r -> output using report mode
 -w -> output wide report
 -c -> set the number of pings sent
 -j -> output json
 -n -> do not resove host names
--z -> display AS number
+
+
+Usage:
+
+docker run -dit --name trap-google-dns \
+  -e PING_COUNT='10' \
+  -e TARGET_IP='8.8.8.8' \
+  -e MONITOR_NAME='GoogleDNS' \
+  -e LOGSTASH_IP='10.2.65.39' \
+  -e LOGSTASH_PORT='12345' \
+  -e MONITORING_INTERVAL='60' \
+  --network host \
+  trap
