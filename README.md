@@ -12,13 +12,15 @@ mtr -r -w -j -n -c 1 IP.ADD.RE.SS | ./mtr_parser.py --monitor-name Endpoint-Name
 -n -> do not resove host names
 
 
-Usage:
+Usage Docker:
+
+docker build . -t trap
 
 docker run -dit --name trap-google-dns \
   -e PING_COUNT='10' \
   -e TARGET_IP='8.8.8.8' \
   -e MONITOR_NAME='GoogleDNS' \
-  -e LOGSTASH_IP='10.2.65.39' \
+  -e LOGSTASH_IP='10.10.10.10' \
   -e LOGSTASH_PORT='12345' \
   -e MONITORING_INTERVAL='60' \
   --network host \
