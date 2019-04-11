@@ -1,0 +1,54 @@
+{
+  "order": 0,
+  "version": 60001,
+  "index_patterns": [
+    "elastic-trap-*"
+  ],
+  "settings": {
+    "index": {
+      "number_of_shards": "3",
+      "number_of_replicas": "1",
+      "refresh_interval": "5s"
+    }
+  },
+  "mappings": {
+      "doc": {
+        "properties": {
+          "@timestamp": { "type": "date" },
+          "@version": { "type": "text", "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } } },
+          "current_path_id": { "type": "keyword" },
+          "destination_host": { "type": "ip"}, 
+          "endpoint_hop_number": { "type": "short" },
+          "endpoint_ip": {"type": "ip"},
+          "endpoint_pct_loss": { "type": "float" },
+          "endpoint_ping_avg_ms": { "type": "float" },
+          "endpoint_ping_best_ms": { "type": "float" },
+          "endpoint_ping_count": { "type": "long" },
+          "endpoint_ping_last_ms": { "type": "float" },
+          "endpoint_ping_std_dev": { "type": "float" },
+          "endpoint_ping_worst_ms": { "type": "float" },
+          "hop_ip": { "type": "ip"},
+          "hop_masked": { "type"; "boolean" },
+          "hop_number": { "type": "short" },
+          "hop_pct_loss": { "type": "float" },
+          "hop_ping_avg_ms": { "type": "float" },
+          "hop_ping_best_ms": { "type": "float" },
+          "hop_ping_count": { "type": "long" },
+          "hop_ping_last_ms": { "type": "float" },
+          "hop_ping_std_dev": { "type": "float" },
+          "hop_ping_worst_ms": { "type": "float" },
+          "host": { "type": "keyword" },
+          "monitor_name": { "type": "keyword" },
+          "mtr_bitpattern": { "type": "keyword" },
+          "mtr_fullpath": { "type": "keyword" },
+          "mtr_packet_size": {"type": "integer" },
+          "mtr_ping_count": {"type": "integer" },
+          "mtr_report": { "type": "keyword" },
+          "mtr_tos": { "type": "keyword" },
+          "port": { "type": "integer" },
+          "prev_hop": { "type": "ip" },
+          "souce_host": { "type": "keyword" }
+        }
+      }
+  }
+}
