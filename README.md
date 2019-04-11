@@ -23,6 +23,22 @@ docker run -dit --name trap-google-dns \
   --network host \
   trap
 ```
+Example of logstash setup
+```
+input {
+  tcp {
+    port => 12345
+    codec => json
+  }
+}
+
+output {
+    elasticsearch {
+      hosts => ["10.10.10.10:9200""]
+      index => "elastic-trap-%{+YYYY.MM.dd}"
+    }
+}
+```
 # Details
 Script generates two document types: mtr_report: hop and mtr_report: fullpath. Hop, as the name suggests, contains information about each hop (hop_pct_loss, hop_number, etc.), while fullpath contains information only about enpoint related metrics (as well as some other things like mtr_fullpath, mtr_packet_size etc.). Mtr is used with following flags:
 ```
