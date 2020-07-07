@@ -28,7 +28,7 @@
           "endpoint_ping_std_dev": { "type": "float" },
           "endpoint_ping_worst_ms": { "type": "float" },
           "hop_ip": { "type": "ip"},
-          "hop_masked": { "type"; "boolean" },
+          "hop_masked": { "type": "boolean" },
           "hop_number": { "type": "short" },
           "hop_pct_loss": { "type": "float" },
           "hop_ping_avg_ms": { "type": "float" },
