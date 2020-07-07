@@ -1,19 +1,19 @@
-# trap
+# mtr-monitoring-elastic
 Inspired by: (https://github.com/svdasein/logstash-codec-mtrraw)
 
 trap is a python script that takes input from MTR in json format, adds additional fields and than sends MTR reports to logstash via nc.  Works with mtr 0.92, ELK stack 6.6.1. 
 
 # Installation: 
 ```
-git clone https://github.com/mirsafari/trap.git
+git clone https://github.com/mirsafari/mtr-monitoring-elastic.git
 ```
 ```
-docker build . -t trap
+docker build . -t mtr-monitoring-elastic
 ```
 # Usage:
 Run signe container per monitored endpoint and change environment variables to suit your needs
 ```
-docker run -dit --name trap-google-dns \
+docker run -dit --name mtr-monitoring-elastic-google-dns \
   -e PING_COUNT='10' \
   -e TARGET_IP='8.8.8.8' \
   -e MONITOR_NAME='GoogleDNS' \
@@ -35,7 +35,7 @@ input {
 output {
     elasticsearch {
       hosts => ["10.10.10.10:9200""]
-      index => "elastic-trap-%{+YYYY.MM.dd}"
+      index => "mtr-monitoring-elastic-%{+YYYY.MM.dd}"
     }
 }
 ```
