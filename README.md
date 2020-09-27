@@ -1,7 +1,7 @@
 # mtr-monitoring-elastic
 Inspired by: (https://github.com/svdasein/logstash-codec-mtrraw)
 
-trap is a python script that takes input from MTR in json format, adds additional fields and than sends MTR reports to logstash via nc.  Works with mtr 0.92, ELK stack 6.6.1. 
+trap is a python script that takes input from MTR in json format, adds additional fields and than sends MTR reports to logstash via nc.  Works with mtr 0.92, ELK stack 7.8.0. 
 
 # Installation: 
 ```
